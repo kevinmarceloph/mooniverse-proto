@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block container %}
+<div class="container theme-showcase" role="main">
+  <div class="page-header">
+    <div class="pull-right">
+      {% for tag in page.data.tags %}
+      <span class="label label-{{ tag.label_class }}">{{ tag.tag }}</span>
+      {% endfor %}
+    </div>
+    <h1>{{ page.name }}</h1>
+    <small>{{ page.description }}</small>
+  </div>
+
+  {% if page.page_images.exists %}
+  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      {% for page_image in page.page_images.all %}
+      <li data-target="#carousel-example-generic" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+      {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+      {% for page_image in page.page_images.all %}
+      <div class="item {% if forloop.first %}active{% endif %}">
+        <img alt="{{ page }}" src="{{ page_image.image.image.url }}">
+      </div>
+      {% endfor %}
+    </div>
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+
+  <hr>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        {% include page.page_type|add:"_sidebar.html" %}
+      </div>
+      {% comment %}
+      <div class="panel panel-default information">
+        <div class="panel-heading">
+          <h3>Information</h3>
+        </div>
+        <div class="panel-body">
+          <table>
+            <tr>
+              <th>Directed by</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>Kenji Kodama</li>
+                  <li>Yasuichiro Yamamoto</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Produced by</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>Michihiko Suwa</li>
+                  <li>Masahito Yoshioka</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Music by</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>Katsuo Ono</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Studio</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>TMS Entertainment</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Network</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>(JP) NNS, Animax</li>
+                  <li>(CA) YTV</li>
+                  <li>(PH) Animax, GMA Network</li>
+                  <li>(US) Cartoon Network, Funimation Channel, Colours TV</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Original run</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>January 8, 1996 – ongoing</li>
+                </ul>
+              <td>
+            </tr>
+            <tr>
+              <th>Episodes</th>
+              <td>
+                <ul class="list-unstyled">
+                  <li>753 (list)</li>
+                </ul>
+              <td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      {% endcomment %}
+    </div><!-- /.col-sm-4 -->
+
+    {% if page.data.tabs %}
+    <div class="content col-md-8 bs-example-tabs">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        {% for tab in page.data.tabs %}
+        <li {% if forloop.first %}class="active"{% endif %}><a href="#{{ tab.slug }}" role="tab" data-toggle="tab">{{ tab.name }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        {% for tab in page.data.tabs %}
+        <div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ tab.slug }}">
+          <div class="row">
+            <div class="col-sm-12">
+              {{ tab.text|linebreaks }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div><!-- /.col-md-8 -->
+    {% endif %}
+  </div>
+</div> <!-- /container -->
+{% endblock %}

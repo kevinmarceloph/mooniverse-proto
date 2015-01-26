@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block container %}
+<div class="container theme-showcase" role="main">
+  <div class="page-header">
+    <div class="pull-right">
+      <span class="label label-default">Homepage</span>
+      <span class="label label-primary">Welcome!</span>
+    </div>
+    <h1>Mooniverse</h1>
+  </div>
+  <div class="col-sm-12">
+    {% if request.user.is_authenticated %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_text">Update</label>
+        {{ form.text }}
+      </div>
+      {{ form.date_added }}
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+    <hr>
+    {% endif %}
+    <div class="list-group">
+      {% for update in update_list %}
+      <span class="list-group-item">
+        <h4 class="list-group-item-heading">{{ update.user }}</h4>
+        <p class="list-group-item-text">{{ update.render_text|safe }}</p>
+      </span>
+      {% endfor %}
+    </div>
+  </div>
+</div> <!-- /container -->
+{% endblock %}

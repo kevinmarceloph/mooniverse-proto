@@ -1,0 +1,10 @@
+<div class="panel-heading">
+  <h3>{{ page.data.series_label|title }} Data</h3>
+</div>
+<div class="panel-body">
+  <ul class="list-unstyled">
+    <li>Episodes: <input style="width: 3em;"> {% if page.data.aired_episodes != page.data.total_episodes %}/ {{ page.data.aired_episodes }} aired{% endif %} / {{ page.data.total_episodes }} total</li>
+    <li>Rating: 1 2 3 4 5</li>
+    <li>Next Episode: 754, Oct 4 10pm JST</li>
+  </ul>
+</div>

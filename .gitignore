@@ -1,0 +1,17 @@
+db.sqlite3
+logs/
+static/
+media/
+bin/
+lib/
+run/
+share/
+*.pyc
+.bash_history
+.gitconfig
+.ipython/
+.pip/
+.profile
+.vim/
+.viminfo
+.vimrc
